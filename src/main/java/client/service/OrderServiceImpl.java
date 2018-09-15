@@ -8,14 +8,16 @@ import main.java.client.dto.Order;
 import main.java.client.dto.OrderLineItem;
 import main.java.taxapp.domain.TaxCategory;
 import main.java.taxapp.facade.TaxFacade;
-import main.java.taxapp.facade.TaxFacadeImpl;
 
-class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {
 
 	private InMemoryDataStore inMemoryDataStore;
 
-	public OrderServiceImpl(InMemoryDataStore productInMemoryDataStore) {
+	private TaxFacade taxFacade;
+	
+	public OrderServiceImpl(InMemoryDataStore productInMemoryDataStore, TaxFacade taxFacade) {
 		this.inMemoryDataStore = productInMemoryDataStore;
+		this.taxFacade = taxFacade;
 	}
 
 	@Override
@@ -33,7 +35,7 @@ class OrderServiceImpl implements OrderService {
 			// Calculating tax
 			if (null != product.getTaxCategory()) {
 				orderTotalTax = orderTotalTax.add(calculateTax(orderLineItem,
-						product.getTaxCategory()));
+						orderLineItem.getProductName()));
 			}
 		}
 		order.setTotalPrice(orderTotalPrice);
@@ -50,7 +52,6 @@ class OrderServiceImpl implements OrderService {
 	 */
 	private BigDecimal calculateTax(OrderLineItem orderLineItem,
 			String productName) {
-		TaxFacade taxFacade = new TaxFacadeImpl(taxService);
 		TaxCategory taxCategory = taxFacade
 				.getTaxCategoryByProductName(productName);
 		if (!taxCategory.getPercentage().equals(BigDecimal.ZERO)) {

@@ -3,7 +3,7 @@ package main.java.taxapp.service;
 import main.java.client.dao.InMemoryDataStore;
 import main.java.taxapp.domain.TaxCategory;
 
-class TaxServiceImpl implements TaxService {
+public class TaxServiceImpl implements TaxService {
 
 	InMemoryDataStore inMemoryDataStore;
 
