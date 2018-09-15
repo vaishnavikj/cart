@@ -17,20 +17,17 @@ import main.java.taxapp.service.TaxServiceImpl;
 
 public class ShoppingClient {
 
-	// TODO : Inject 
+	// TODO : Inject
 	InMemoryDataStore inMemoryDataStore = new InMemoryDataStore();
-	TaxService taxService = new TaxServiceImpl(inMemoryDataStore);
-	TaxFacade taxFacade = new TaxFacadeImpl(taxService);
-	OrderService orderService = new OrderServiceImpl(inMemoryDataStore,
-			taxFacade);
-	OrderFacade orderFacade = new OrderFacadeImpl(orderService);
+	TaxFacade taxFacade = getTaxFacadeImpl();
+	OrderFacade orderFacade = getOrderFacadeImpl();
 
 	public static void main(String[] a) {
 		Order newOrder = new Order();
 		newOrder.addOrderLineItem(new OrderLineItem("Basic",
 				new BigDecimal(10), new BigDecimal(2)));
-		newOrder.addOrderLineItem(new OrderLineItem("Premium", new BigDecimal(
-				10), new BigDecimal(10)));
+//		newOrder.addOrderLineItem(new OrderLineItem("Premium", new BigDecimal(
+//				10), new BigDecimal(10)));
 
 		ShoppingClient client = new ShoppingClient();
 		Receipt receipt = client.purchaseOrder(newOrder);
@@ -38,11 +35,28 @@ public class ShoppingClient {
 
 	}
 
+	private OrderFacade getOrderFacadeImpl() {
+		if (null == orderFacade) {
+			OrderService orderService = new OrderServiceImpl(inMemoryDataStore,
+					taxFacade);
+			orderFacade = new OrderFacadeImpl(orderService);
+		}
+		return orderFacade;
+	}
+
+	private TaxFacade getTaxFacadeImpl() {
+		if (null == taxFacade) {
+			TaxService taxService = new TaxServiceImpl(inMemoryDataStore);
+			taxFacade = new TaxFacadeImpl(taxService);
+		}
+		return taxFacade;
+	}
+
 	/**
 	 * 
 	 * @param newOrder
 	 */
-	private Receipt purchaseOrder(Order newOrder) {
+	public Receipt purchaseOrder(Order newOrder) {
 		Receipt receipt = new Receipt();
 		receipt.setPurchasedOrder(orderFacade.purchaseOrder(newOrder));
 		return receipt;
