@@ -1,4 +1,4 @@
-package main.java.client.domain;
+package main.com.taxapp.domain;
 
 public class Product {
 

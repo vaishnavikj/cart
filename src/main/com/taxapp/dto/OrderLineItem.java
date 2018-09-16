@@ -1,4 +1,4 @@
-package main.java.client.dto;
+package main.com.taxapp.dto;
 
 import java.math.BigDecimal;
 

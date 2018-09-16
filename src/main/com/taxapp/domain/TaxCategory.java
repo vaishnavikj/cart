@@ -1,4 +1,4 @@
-package main.java.taxapp.domain;
+package main.com.taxapp.domain;
 
 import java.math.BigDecimal;
 

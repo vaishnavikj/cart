@@ -1,11 +1,11 @@
-package main.java.client.dao;
+package main.com.taxapp.dao;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.client.domain.Product;
-import main.java.taxapp.domain.TaxCategory;
+import main.com.taxapp.domain.Product;
+import main.com.taxapp.domain.TaxCategory;
 
 public class InMemoryDataStore {
 
@@ -18,11 +18,12 @@ public class InMemoryDataStore {
 		// Preparing ProductMap
 		productMap.put("Basic", new Product("Basic"));
 		productMap.put("Standard", new Product("Standard"));
+		
 		Product.ProductBuilder taxationProduct = new Product.ProductBuilder();
 		taxationProduct.build();
-		taxationProduct.setName("Premium");
-		taxationProduct.setTaxCategory("ZERO_TAX");
-		productMap.put("Premium", taxationProduct.build());
+		taxationProduct.setName("GSTProduct");
+		taxationProduct.setTaxCategory("SGST");
+		productMap.put("GSTProduct", taxationProduct.build());
 
 		// Preparing taxCategoryMap
 		taxCategoryMap = new HashMap<>();
