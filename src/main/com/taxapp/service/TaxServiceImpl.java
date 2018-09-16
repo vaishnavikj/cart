@@ -6,6 +6,7 @@ import main.com.taxapp.dao.InMemoryDataStore;
 import main.com.taxapp.domain.Product;
 import main.com.taxapp.dto.Order;
 import main.com.taxapp.dto.OrderLineItem;
+import main.com.taxapp.exception.TaxAppRunTimeException;
 
 public class TaxServiceImpl {
 
@@ -30,7 +31,11 @@ public class TaxServiceImpl {
 			orderTotalPrice = orderTotalPrice
 					.add(orderLineItem.getTotalPrice());
 			// Calculating tax
-			if (null != product.getTaxCategory()) {
+			if (null == product.getTaxCategory()) {
+				throw new TaxAppRunTimeException(
+						"TaxCategory is missing for the product - "
+								+ product.getName());
+			} else {
 				orderTotalTax = orderTotalTax.add(calculateTax(orderLineItem));
 			}
 		}
