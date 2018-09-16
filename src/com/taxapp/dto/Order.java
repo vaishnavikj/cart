@@ -1,4 +1,4 @@
-package main.com.taxapp.dto;
+package com.taxapp.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

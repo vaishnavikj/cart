@@ -1,21 +1,18 @@
 /**
  * 
  */
-package test;
+package test.com.taxapp.service;
 
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
-import main.com.taxapp.dao.InMemoryDataStore;
-import main.com.taxapp.dto.Order;
-import main.com.taxapp.dto.OrderLineItem;
-import main.com.taxapp.service.TaxCalculator;
-import main.com.taxapp.service.TaxCalculatorImpl;
-import main.com.taxapp.service.TaxServiceImpl;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import com.taxapp.dto.Order;
+import com.taxapp.dto.OrderLineItem;
+import com.taxapp.service.TaxServiceImpl;
 
 /**
  * @author vaishnavi
@@ -30,9 +27,7 @@ public class TaxServiceImplTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		InMemoryDataStore inMemoryDataStore = new InMemoryDataStore();
-		TaxCalculator taxCalculator = new TaxCalculatorImpl(inMemoryDataStore);
-		taxServiceImpl = new TaxServiceImpl(taxCalculator, inMemoryDataStore);
+		taxServiceImpl = new TaxServiceImpl();
 	}
 
 	@Test

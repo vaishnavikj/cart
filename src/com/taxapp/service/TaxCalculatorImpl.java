@@ -1,16 +1,16 @@
-package main.com.taxapp.service;
+package com.taxapp.service;
 
 import java.math.BigDecimal;
 
-import main.com.taxapp.dao.InMemoryDataStore;
-import main.com.taxapp.domain.TaxCategory;
+import com.taxapp.dao.InMemoryDataStore;
+import com.taxapp.domain.TaxCategory;
 
 public class TaxCalculatorImpl implements TaxCalculator {
 
-	InMemoryDataStore inMemoryDataStore;
+	private InMemoryDataStore inMemoryDataStore;
 
-	public TaxCalculatorImpl(InMemoryDataStore inMemoryDataStore) {
-		this.inMemoryDataStore = inMemoryDataStore;
+	public TaxCalculatorImpl() {
+		inMemoryDataStore = new InMemoryDataStore();
 	}
 
 	@Override

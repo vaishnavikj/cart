@@ -1,4 +1,4 @@
-package main.com.taxapp.service;
+package com.taxapp.service;
 
 import java.math.BigDecimal;
 

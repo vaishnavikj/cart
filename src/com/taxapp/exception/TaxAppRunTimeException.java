@@ -1,7 +1,4 @@
-/**
- * 
- */
-package main.com.taxapp.exception;
+package com.taxapp.exception;
 
 /**
  * @author vaishnavi

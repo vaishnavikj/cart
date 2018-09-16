@@ -1,14 +1,12 @@
-package main.com.taxapp.domain;
+package com.taxapp.domain;
 
 import java.math.BigDecimal;
 
 public class TaxCategory {
 
-	String name;
+	private String name;
 
-	String code;
-
-	BigDecimal percentage;
+	private BigDecimal percentage;
 
 	public TaxCategory(String name, BigDecimal percentage) {
 		this.name = name;
